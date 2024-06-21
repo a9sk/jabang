@@ -26,7 +26,7 @@ public class FileHandler {
         }
     }
 
-    public void writeBackup(List<Note> notes) {
+    public void writeBackup(List<String> notes) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("backup_" + filePath))) {
             oos.writeObject(notes);
         } catch (IOException e) {

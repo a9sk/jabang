@@ -38,10 +38,18 @@ public class NoteManager {
     }
 
     public void backupNotes() {
-        fileHandler.writeBackup(notes);
+        fileHandler.writeBackup(noteToString(notes));
     }
 
     public void restoreNotes() {
         this.notes = fileHandler.readBackup();
+    }
+    
+    private List<String> noteToString(List<Note> notesList){
+        List<String> stringList;
+        for(int i=0; i<notesList.size(); i++){
+            stringList.addLast(notesList.get(i).toString());
+        }
+        return stringList;
     }
 }
