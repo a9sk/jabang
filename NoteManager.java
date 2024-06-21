@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class NoteManager {
     private List<Note> notes;
@@ -24,5 +25,23 @@ public class NoteManager {
     public void deleteNote(Note note) {
         notes.remove(note);
         fileHandler.writeNotes(notes);
+    }
+
+    public List<Note> searchNotes(String keyword) {
+        return notes.stream()
+                .filter(note -> note.getTitle().contains(keyword) || note.getContent().contains(keyword))
+                .collect(Collectors.toList());
+    }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void backupNotes() {
+        fileHandler.writeBackup(notes);
+    }
+
+    public void restoreNotes() {
+        this.notes = fileHandler.readBackup();
     }
 }
