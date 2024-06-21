@@ -25,4 +25,21 @@ public class FileHandler {
             return new ArrayList<>();
         }
     }
+
+    public void writeBackup(List<Note> notes) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("backup_" + filePath))) {
+            oos.writeObject(notes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Note> readBackup() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("backup_" + filePath))) {
+            return (List<Note>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
 }
