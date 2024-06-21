@@ -63,7 +63,58 @@ public class Jabang {
         frame.add(panel);
         frame.setVisible(true);
     }
-    
+
+    private void displaySelectedNote() {
+        Note selectedNote = noteList.getSelectedValue();
+        if (selectedNote != null) {
+            noteTitle.setText(selectedNote.getTitle());
+            noteContent.setText(selectedNote.getContent());
+            noteCategory.setText(selectedNote.getCategory());
+        }
+    }
+
+    private void addNote() {
+        String title = noteTitle.getText();
+        String content = noteContent.getText();
+        String category = noteCategory.getText();
+        Note note = new Note(title, content, category);
+        noteManager.addNote(note);
+        noteListModel.addElement(note);
+    }
+
+    private void editNote() {
+        Note selectedNote = noteList.getSelectedValue();
+        if (selectedNote != null) {
+            String title = noteTitle.getText();
+            String content = noteContent.getText();
+            String category = noteCategory.getText();
+            Note newNote = new Note(title, content, category);
+            noteManager.editNote(selectedNote, newNote);
+            int selectedIndex = noteList.getSelectedIndex();
+            noteListModel.setElementAt(newNote, selectedIndex);
+        }
+    }
+
+    private void deleteNote() {
+        Note selectedNote = noteList.getSelectedValue();
+        if (selectedNote != null) {
+            noteManager.deleteNote(selectedNote);
+            noteListModel.removeElement(selectedNote);
+        }
+    }
+
+    private void backupNotes() {
+        noteManager.backupNotes();
+        JOptionPane.showMessageDialog(frame, "Notes backed up successfully.");
+    }
+
+    private void restoreNotes() {
+        noteManager.restoreNotes();
+        noteListModel.clear();
+        noteManager.getNotes().forEach(noteListModel::addElement);
+        JOptionPane.showMessageDialog(frame, "Notes restored successfully.");
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Jabang::new);
     }
