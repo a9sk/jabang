@@ -1,5 +1,4 @@
 import java.io.Serializable;
-import java.util.Date;
 
 public class Note implements Serializable {
     private String title;
@@ -12,14 +11,12 @@ public class Note implements Serializable {
         this.category = category;
     }
 
-    // Getters and setters
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
-        this.dateModified = new Date();
     }
 
     public String getContent() {
@@ -28,7 +25,6 @@ public class Note implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
-        this.dateModified = new Date();
     }
 
     public String getCategory() {
@@ -37,16 +33,8 @@ public class Note implements Serializable {
 
     public void setCategory(String category) {
         this.category = category;
-        this.dateModified = new Date();
     }
 
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public Date getDateModified() {
-        return dateModified;
-    }
 
     @Override
     public String toString() {
