@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.Date;
 
 public class Note implements Serializable {
     private String title;
