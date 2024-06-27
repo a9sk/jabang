@@ -25,40 +25,45 @@ public class Jabang {
         noteList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         noteList.addListSelectionListener(e -> displaySelectedNote());
         JScrollPane noteListScrollPane = new JScrollPane(noteList);
+        noteListScrollPane.setPreferredSize(new Dimension(250, 600)); // Set the desired width
 
         noteContent = new JTextArea();
         noteTitle = new JTextField();
         noteCategory = new JTextField();
 
+        JPanel noteDetailsPanel = new JPanel(new BorderLayout());
+        JPanel noteInfoPanel = new JPanel(new GridLayout(3, 2));
+
+        noteInfoPanel.add(new JLabel("Title:"));
+        noteInfoPanel.add(noteTitle);
+        noteInfoPanel.add(new JLabel("Category:"));
+        noteInfoPanel.add(noteCategory);
+
+        noteDetailsPanel.add(noteInfoPanel, BorderLayout.NORTH);
+        noteDetailsPanel.add(new JScrollPane(noteContent), BorderLayout.CENTER);
+
+        JPanel toolbar = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton addNoteButton = new JButton("Add Note");
         addNoteButton.addActionListener(e -> addNote());
-
         JButton editNoteButton = new JButton("Save Edit");
         editNoteButton.addActionListener(e -> editNote());
-
         JButton deleteNoteButton = new JButton("Delete Note");
         deleteNoteButton.addActionListener(e -> deleteNote());
-
         JButton backupButton = new JButton("Backup Notes");
         backupButton.addActionListener(e -> backupNotes());
-
         JButton restoreButton = new JButton("Restore Notes");
         restoreButton.addActionListener(e -> restoreNotes());
 
-        JPanel noteDetailsPanel = new JPanel(new GridLayout(5, 2));
-        noteDetailsPanel.add(new JLabel("Title:"));
-        noteDetailsPanel.add(noteTitle);
-        noteDetailsPanel.add(new JLabel("Category:"));
-        noteDetailsPanel.add(noteCategory);
-        noteDetailsPanel.add(new JScrollPane(noteContent));
-        noteDetailsPanel.add(addNoteButton);
-        noteDetailsPanel.add(editNoteButton);
-        noteDetailsPanel.add(deleteNoteButton);
-        noteDetailsPanel.add(backupButton);
-        noteDetailsPanel.add(restoreButton);
+        toolbar.add(addNoteButton);
+        toolbar.add(editNoteButton);
+        toolbar.add(deleteNoteButton);
+        toolbar.add(backupButton);
+        toolbar.add(restoreButton);
 
         panel.add(noteListScrollPane, BorderLayout.WEST);
         panel.add(noteDetailsPanel, BorderLayout.CENTER);
+        panel.add(toolbar, BorderLayout.SOUTH);
+
 
         frame.add(panel);
         frame.setVisible(true);
