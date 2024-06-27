@@ -33,7 +33,7 @@ public class Jabang {
         JButton addNoteButton = new JButton("Add Note");
         addNoteButton.addActionListener(e -> addNote());
 
-        JButton editNoteButton = new JButton("Edit Note");
+        JButton editNoteButton = new JButton("Save Edit");
         editNoteButton.addActionListener(e -> editNote());
 
         JButton deleteNoteButton = new JButton("Delete Note");
